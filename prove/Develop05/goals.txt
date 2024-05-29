@@ -1,0 +1,4 @@
+Score:0
+SimpleGoal:give a talk~speak in sacraments~100~False
+EternalGoal:study the scerp~study at least  10 min~50
+CheckListGoal:atten temple~attend and perform any ord~50~500~3~0
