@@ -18,21 +18,20 @@ public class ChecklistGoal : Goal
         _amountCompleted = ammount;
     }
 
-    public int GetTotalPoints()
-    {
-        int total = GetPoints(); 
-        total += _bonus;
-        return total;
-    }
+    //public int GetTotalPoints()
+    //{
+        //int total = GetPoints(); 
+        //total += _bonus;
+        //return total;//
+    //}//
 
     public override int RecordEvent()
     {
         _amountCompleted ++;
 
-        if (IsComplete())
+        if (_amountCompleted >= _target)
         {
-            int totalPoints = GetTotalPoints();
-            SetPoints(totalPoints);
+            int totalPoints = _points + _bonus;  // Sumar puntos y bono solo si está completo
             Console.WriteLine($"Congratulations, you have earned {totalPoints} points!!!");
             return totalPoints;
         }
@@ -45,30 +44,24 @@ public class ChecklistGoal : Goal
 
     public override bool IsComplete()
     {
-        bool complete = false;
-        if (_amountCompleted == _target)
-        {
-            complete = true;
-        }
-        return  complete;
+        return _amountCompleted >= _target;
+        //bool complete = false;
+        //if (_amountCompleted == _target)
+        //{
+            //complete = true;
+        //}
+        //return  complete;//
     }
 
     public override string GetDetailsString()
     {
-        string complete =" ";
-        bool isComplete = IsComplete();
-        if (isComplete==true)
-        {
-            complete="x";
-        }
-
-        string text = $"[{complete}] {base.GetName()} ({base.GetDescription()}) -- Curretly completed {_amountCompleted}/{_target}."; 
-        return text;
+        string complete = IsComplete() ? "x" : " ";
+        return $"[{complete}] {GetName()} ({GetDescription()}) -- Currently completed {_amountCompleted}/{_target}.";
+        
     }
 
     public override string GetStringRepresentation()
     {
-        string text = $"CheckListGoal:{base.GetName()}~{base.GetDescription()}~{base.GetPoints()}~{_bonus}~{_target}~{_amountCompleted}";
-        return text;
+        return $"ChecklistGoal:{GetName()}~{GetDescription()}~{GetPoints()}~{_target}~{_bonus}~{_amountCompleted}";
     }
 }

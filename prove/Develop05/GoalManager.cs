@@ -104,17 +104,16 @@ public class GoalManager
         if (index >= 0 && index < _goals.Count)
         {
             Goal goal = _goals[index];
-            goal.RecordEvent();
+            int pointsEarned = goal.RecordEvent();
+            _score += pointsEarned;
 
             if (goal.IsComplete())
             {
-                int points = goal.GetPoints();
-                _score += points;
                 Console.WriteLine($"Goal '{goal.GetName()}' completed! You have {_score} points now.");
             }
             else
             {
-                Console.WriteLine($"Event recorded for goal '{goal.GetName()}', but it's not complete yet.");
+                Console.WriteLine($"Event recorded for goal '{goal.GetName()}'. You have {_score} points now.");
             }
         }
         else

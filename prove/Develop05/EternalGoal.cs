@@ -9,7 +9,8 @@ public class EternalGoal : Goal
 
     public override int RecordEvent()
     {
-        return base.GetPoints();
+        Console.WriteLine($"You have earned {GetPoints()} points.");
+        return GetPoints();
     }
 
     public override bool IsComplete()
@@ -19,7 +20,14 @@ public class EternalGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        string text = $"EternalGoal:{base.GetName()}~{base.GetDescription()}~{base.GetPoints()}";
-        return text;
+        return $"EternalGoal:{GetName()}~{GetDescription()}~{GetPoints()}";
+
     }
+
+    public override string GetDetailsString()
+    {
+        // Provide details string for eternal goals.
+        return $"[ ] {GetName()} ({GetDescription()})";
+    }
+    
 }
